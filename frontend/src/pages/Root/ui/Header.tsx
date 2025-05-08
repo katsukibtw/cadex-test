@@ -19,6 +19,7 @@ const HeaderContainer = styled(Stack)(() => ({
   padding: "0 7.5vw",
   height: "7.5rem",
   backdropFilter: "blur(20px)",
+  zIndex: 200,
 }));
 
 const Header = () => {
