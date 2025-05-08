@@ -1,4 +1,5 @@
 import { styled } from "@mui/joy";
+import { useMediaQuery } from "@mui/material";
 
 import { GradientSeparator } from "@/shared/StyledComponents";
 
@@ -12,9 +13,20 @@ const FooterContainer = styled("div")(() => ({
 }));
 
 const Footer = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <>
-      <GradientSeparator />
+      <GradientSeparator
+        sx={
+          isMobile
+            ? {
+                background: "rgba(102, 102, 102, 0.8)",
+                width: "100vw",
+              }
+            : {}
+        }
+      />
       <FooterContainer>Some company 2025</FooterContainer>
     </>
   );
