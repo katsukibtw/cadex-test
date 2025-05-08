@@ -7,6 +7,9 @@ import {
   Textarea,
   styled,
 } from "@mui/joy";
+import axios, { AxiosError } from "axios";
+import { useRef, useState } from "react";
+import { Form, useNavigate } from "react-router";
 
 import { SerifHeading } from "@/shared/StyledComponents";
 
@@ -88,7 +91,45 @@ const StyledTextarea = styled(Textarea)(({ theme }) => ({
   },
 }));
 
+const StyledForm = styled(Form)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  padding: "1.5rem",
+  gap: "1rem",
+}));
+
 const ContactUs = () => {
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const navigate = useNavigate();
+
+  const handleFormSubmit = async () => {
+    if (
+      nameRef.current !== null &&
+      emailRef.current !== null &&
+      messageRef.current !== null
+    ) {
+      setIsLoading(true);
+      try {
+        const response = await axios.post("http://localhost:3000/", {
+          name: nameRef.current.value,
+          email: emailRef.current.value,
+          messageRef: messageRef.current.value,
+        });
+        console.log(response.data);
+        setIsLoading(false);
+        navigate(`/contact-us/response`);
+      } catch (e) {
+        console.error(e as AxiosError);
+        setIsLoading(false);
+      }
+    }
+  };
+
   return (
     <PageContainer>
       <SerifHeading level="h1" fontSize={"4rem"}>
@@ -97,32 +138,59 @@ const ContactUs = () => {
       <Sheet
         variant="outlined"
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          padding: "1.5rem",
-          gap: "1rem",
           borderRadius: "0.5rem",
         }}
       >
-        <FormControl>
-          <FormLabel>Name</FormLabel>
-          <StyledInput type="text" placeholder="Value" />
-        </FormControl>
-        <FormControl>
-          <FormLabel>Email</FormLabel>
-          <StyledInput type="email" placeholder="Value" />
-        </FormControl>
-        <FormControl>
-          <FormLabel>Message</FormLabel>
-          <StyledTextarea sx={{ height: "5rem" }} placeholder="Value" />
-        </FormControl>
-        <Button
-          sx={{
-            marginTop: "0.5rem",
-          }}
-        >
-          Submit
-        </Button>
+        <StyledForm onSubmit={handleFormSubmit}>
+          <FormControl>
+            <FormLabel>Name</FormLabel>
+            <StyledInput
+              type="text"
+              placeholder="Value"
+              required
+              slotProps={{
+                input: {
+                  ref: nameRef,
+                },
+              }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Email</FormLabel>
+            <StyledInput
+              type="email"
+              placeholder="Value"
+              required
+              slotProps={{
+                input: {
+                  ref: emailRef,
+                },
+              }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Message</FormLabel>
+            <StyledTextarea
+              sx={{ height: "5rem" }}
+              placeholder="Value"
+              required
+              slotProps={{
+                textarea: {
+                  ref: messageRef,
+                },
+              }}
+            />
+          </FormControl>
+          <Button
+            type="submit"
+            loading={isLoading}
+            sx={{
+              marginTop: "0.5rem",
+            }}
+          >
+            Submit
+          </Button>
+        </StyledForm>
       </Sheet>
     </PageContainer>
   );

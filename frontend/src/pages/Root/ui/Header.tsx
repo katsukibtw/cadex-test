@@ -18,7 +18,6 @@ const HeaderContainer = styled(Stack)(() => ({
   padding: "0 7.5vw",
   height: "7.5rem",
   backdropFilter: "blur(20px)",
-  boxShadow: "0.5rem 0 1rem hsl(0, 0%, 0%, 0.75)",
 }));
 
 const Header = () => {
