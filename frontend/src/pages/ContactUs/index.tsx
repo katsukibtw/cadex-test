@@ -122,7 +122,11 @@ const ContactUs = () => {
         });
         console.log(response.data);
         setIsLoading(false);
-        navigate(`/contact-us/response`);
+        navigate(`/contact-us/response`, {
+          state: {
+            redirected: true,
+          },
+        });
       } catch (e) {
         console.error(e as AxiosError);
         setIsLoading(false);
