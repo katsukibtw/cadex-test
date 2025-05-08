@@ -1,4 +1,5 @@
 import { styled } from "@mui/joy";
+import { useMediaQuery } from "@mui/material";
 import { Outlet } from "react-router";
 
 import Footer from "./ui/Footer";
@@ -16,9 +17,15 @@ const RootContainer = styled("div")(({ theme }) => ({
 }));
 
 const Root = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <>
-      <RootContainer>
+      <RootContainer
+        sx={{
+          width: isMobile ? "100vw" : undefined,
+        }}
+      >
         <Header />
         <div style={{ display: "flex", flex: 1 }}>
           <Outlet />

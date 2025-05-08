@@ -1,4 +1,5 @@
 import { Sheet, Stack, Typography, styled } from "@mui/joy";
+import { useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router";
 
 import { SerifHeading, StyledButton } from "@/shared/StyledComponents";
@@ -26,13 +27,25 @@ const Card = () => {
 const AlsoImportantSection = () => {
   const navigate = useNavigate();
 
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const range = (from: number, to: number, step: number = 1) =>
     [...Array(Math.floor((to - from) / step) + 1)].map(
       (_, i) => from + i * step
     );
 
   return (
-    <SectionContainer>
+    <SectionContainer
+      sx={
+        isMobile
+          ? {
+              width: "90vw",
+              padding: 0,
+              marginInline: "auto",
+            }
+          : {}
+      }
+    >
       <Sheet
         sx={{
           background: "transparent",
@@ -42,15 +55,15 @@ const AlsoImportantSection = () => {
           justifyContent: "center",
         }}
       >
-        <SerifHeading level="h1" fontSize={"3rem"}>
+        <SerifHeading level="h1" fontSize={isMobile ? "2rem" : "3rem"}>
           Also very important title
         </SerifHeading>
       </Sheet>
       <Stack
         display={"grid"}
-        gridTemplateColumns={"repeat(3, 1fr)"}
-        gridTemplateRows={"repeat(2, 1fr)"}
-        gap={"5rem"}
+        gridTemplateColumns={isMobile ? "1fr" : "repeat(3, 1fr)"}
+        gridTemplateRows={isMobile ? "repeat(6, 1fr)" : "repeat(2, 1fr)"}
+        gap={isMobile ? "2rem" : "5rem"}
       >
         {range(0, 5).map((el, index) => (
           <Card key={`${el} ${index}`} />

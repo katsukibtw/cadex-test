@@ -1,4 +1,5 @@
 import { styled } from "@mui/joy";
+import { useMediaQuery } from "@mui/material";
 
 import { SerifHeading, StyledButton } from "@/shared/StyledComponents";
 
@@ -12,9 +13,19 @@ const SectionContainer = styled("div")(() => ({
 }));
 
 const LessImportantSection = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
-    <SectionContainer>
-      <SerifHeading level="h1" fontSize={"3rem"}>
+    <SectionContainer
+      sx={
+        isMobile
+          ? {
+              background: "hsl(0, 0%, 50%, 0.1)",
+            }
+          : {}
+      }
+    >
+      <SerifHeading level="h1" fontSize={isMobile ? "2.5rem" : "3rem"}>
         Less important title
       </SerifHeading>
       <StyledButton>Contact us</StyledButton>

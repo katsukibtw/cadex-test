@@ -1,4 +1,5 @@
 import { styled } from "@mui/joy";
+import { useMediaQuery } from "@mui/material";
 import { useLocation } from "react-router";
 
 import { SerifHeading } from "@/shared/StyledComponents";
@@ -15,10 +16,16 @@ const PageContainer = styled("div")(() => ({
 
 const Response = () => {
   const { state } = useLocation();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <PageContainer>
-      <SerifHeading level="h1" fontSize={"4rem"}>
+    <PageContainer
+      sx={{
+        background: isMobile ? "hsl(0, 0%, 50%, 0.1)" : undefined,
+        padding: isMobile ? "2rem" : undefined,
+      }}
+    >
+      <SerifHeading level="h1" fontSize={isMobile ? "2.5rem" : "4rem"}>
         {state !== null
           ? state.message
           : "Произошла ошибка. Сообщение не найдено"}

@@ -7,6 +7,7 @@ import {
   Textarea,
   styled,
 } from "@mui/joy";
+import { useMediaQuery } from "@mui/material";
 import axios, { AxiosError } from "axios";
 import { useRef, useState } from "react";
 import { Form, useNavigate } from "react-router";
@@ -107,6 +108,8 @@ const ContactUs = () => {
 
   const navigate = useNavigate();
 
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const handleFormSubmit = async () => {
     if (
       nameRef.current !== null &&
@@ -135,8 +138,12 @@ const ContactUs = () => {
   };
 
   return (
-    <PageContainer>
-      <SerifHeading level="h1" fontSize={"4rem"}>
+    <PageContainer
+      sx={{
+        background: isMobile ? "hsl(0, 0%, 50%, 0.1)" : undefined,
+      }}
+    >
+      <SerifHeading level="h1" fontSize={isMobile ? "2.5rem" : "4rem"}>
         Only CTA on the page
       </SerifHeading>
       <Sheet

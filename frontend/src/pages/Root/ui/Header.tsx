@@ -1,4 +1,5 @@
 import { Stack, styled } from "@mui/joy";
+import { useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router";
 
 import {
@@ -22,10 +23,16 @@ const HeaderContainer = styled(Stack)(() => ({
 
 const Header = () => {
   const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <>
-      <HeaderContainer>
+      <HeaderContainer
+        sx={{
+          width: isMobile ? "89vw" : undefined,
+          padding: isMobile ? "0 1.5rem" : undefined,
+        }}
+      >
         <SerifHeading
           level="h1"
           onClick={() => navigate("/")}
@@ -35,11 +42,25 @@ const Header = () => {
         >
           Some company
         </SerifHeading>
-        <StyledButton onClick={() => navigate("/contact-us")}>
+        <StyledButton
+          onClick={() => navigate("/contact-us")}
+          sx={{
+            padding: isMobile ? "0.5rem" : undefined,
+          }}
+        >
           Contact us
         </StyledButton>
       </HeaderContainer>
-      <GradientSeparator />
+      <GradientSeparator
+        sx={
+          isMobile
+            ? {
+                background: "rgba(102, 102, 102, 0.8)",
+                width: "100vw",
+              }
+            : {}
+        }
+      />
     </>
   );
 };

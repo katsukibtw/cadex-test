@@ -1,5 +1,6 @@
 import { Stack, Typography, styled } from "@mui/joy";
-import YouTube from "react-youtube";
+import { useMediaQuery } from "@mui/material";
+import YouTube, { type YouTubeProps } from "react-youtube";
 
 import { SerifHeading } from "@/shared/StyledComponents";
 
@@ -14,10 +15,28 @@ const SectionContainer = styled("div")(() => ({
 }));
 
 const MostImportantSection = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const opts: YouTubeProps["opts"] = {
+    height: "200",
+    width: "350",
+  };
+
   return (
-    <SectionContainer>
+    <SectionContainer
+      sx={
+        isMobile
+          ? {
+              width: "85vw",
+              flexDirection: "column",
+              padding: "2rem",
+              background: "hsl(0, 0%, 50%, 0.1)",
+              gap: "1rem",
+            }
+          : {}
+      }
+    >
       <Stack gap={"1rem"}>
-        <SerifHeading level="h1" fontSize={"3.75rem"}>
+        <SerifHeading level="h1" fontSize={isMobile ? "2.75rem" : "3.75rem"}>
           Most important title on the page
         </SerifHeading>
         <Typography fontSize={"1.25rem"}>
@@ -26,7 +45,7 @@ const MostImportantSection = () => {
           suscipit nibh lacus tincidunt ante
         </Typography>
       </Stack>
-      <YouTube videoId="dQw4w9WgXcQ" />
+      <YouTube videoId="dQw4w9WgXcQ" opts={isMobile ? opts : {}} />
     </SectionContainer>
   );
 };
