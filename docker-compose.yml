@@ -6,7 +6,7 @@ services:
       context: ./frontend/
       dockerfile: Dockerfile
       args:
-        VITE_API_URL: "http://localhost/api"
+        - VITE_API_URL=http://localhost/api
 
   backend:
     container_name: backend
@@ -14,8 +14,6 @@ services:
     build:
       context: ./backend/
       dockerfile: Dockerfile
-      args:
-        PORT: 3000
 
   proxy:
     image: nginx

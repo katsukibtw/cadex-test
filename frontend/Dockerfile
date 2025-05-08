@@ -1,7 +1,7 @@
 FROM dh-mirror.gitverse.ru/node:21.7-alpine3.18 AS build
 ARG VITE_API_URL
 ENV NODE_ENV="development"
-ENV VITE_API_URL ${VITE_API_URL?"http://localhost:3000/api"}
+ENV VITE_API_URL ${VITE_API_URL}
 WORKDIR /app
 COPY package.json package.json
 RUN corepack enable && corepack prepare pnpm --activate
