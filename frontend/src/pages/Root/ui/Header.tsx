@@ -23,10 +23,19 @@ const HeaderContainer = styled(Stack)(() => ({
 
 const Header = () => {
   const navigate = useNavigate();
+
   return (
     <>
       <HeaderContainer>
-        <SerifHeading level="h1">Some company</SerifHeading>
+        <SerifHeading
+          level="h1"
+          onClick={() => navigate("/")}
+          sx={{
+            cursor: "pointer",
+          }}
+        >
+          Some company
+        </SerifHeading>
         <StyledButton onClick={() => navigate("/contact-us")}>
           Contact us
         </StyledButton>

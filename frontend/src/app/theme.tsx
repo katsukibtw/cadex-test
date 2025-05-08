@@ -72,8 +72,8 @@ const theme = extendTheme({
           "900": "#150b02",
           solidColor: "var(--joy-palette-primary-900)",
           solidBg: "var(--joy-palette-primary-200)",
-          solidHoverBg: "var(--joy-palette-primary-300)",
-          solidActiveBg: "var(--joy-palette-primary-400)",
+          solidHoverBg: "var(--joy-palette-primary-100)",
+          solidActiveBg: "var(--joy-palette-primary-200)",
         },
         neutral: {
           "50": "#fdfbf8",
@@ -87,9 +87,9 @@ const theme = extendTheme({
           "800": "#1b1b1b",
           "900": "#121212",
           solidColor: "var(--joy-palette-neutral-900)",
-          solidBg: "var(--joy-palette-neutral-200)",
-          solidHoverBg: "var(--joy-palette-neutral-300)",
-          solidActiveBg: "var(--joy-palette-neutral-400)",
+          solidBg: "var(--joy-palette-neutral-100)",
+          solidHoverBg: "var(--joy-palette-neutral-50)",
+          solidActiveBg: "var(--joy-palette-neutral-100)",
         },
         success: {
           "50": "#f4f7ee",

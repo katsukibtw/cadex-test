@@ -20,7 +20,7 @@ const Root = () => {
     <>
       <RootContainer>
         <Header />
-        <div style={{ flex: 1 }}>
+        <div style={{ display: "flex", flex: 1 }}>
           <Outlet />
         </div>
         <Footer />
