@@ -1,11 +1,15 @@
+import { CssVarsProvider } from "@mui/joy";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router";
-import Home from "@/pages/Home.tsx";
-import ContactUs from "@/pages/contact-us";
+import { RouterProvider, createBrowserRouter } from "react-router";
+
+import ContactUs from "@/pages/ContactUs";
+import Response from "@/pages/ContactUs/Response";
+import Home from "@/pages/Home";
 import Root from "@/pages/Root";
-import MessageSent from "@/pages/contact-us/MessageSent";
+
+import "./index.css";
+import theme from "./theme";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +19,10 @@ const router = createBrowserRouter([
       { index: true, Component: Home },
       {
         path: "contact-us",
-        Component: ContactUs,
-        children: [{ path: "response", Component: MessageSent }],
+        children: [
+          { index: true, Component: ContactUs },
+          { path: "response", Component: Response },
+        ],
       },
     ],
   },
@@ -24,6 +30,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+    <CssVarsProvider theme={theme} defaultColorScheme={"dark"}>
+      <RouterProvider router={router} />
+    </CssVarsProvider>
+  </StrictMode>
 );
