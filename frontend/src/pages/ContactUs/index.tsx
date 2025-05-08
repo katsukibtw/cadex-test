@@ -117,7 +117,6 @@ const ContactUs = () => {
           <StyledTextarea sx={{ height: "5rem" }} placeholder="Value" />
         </FormControl>
         <Button
-          color="neutral"
           sx={{
             marginTop: "0.5rem",
           }}
