@@ -143,7 +143,7 @@ const ContactUs = () => {
         background: isMobile ? "hsl(0, 0%, 50%, 0.1)" : undefined,
       }}
     >
-      <SerifHeading level="h1" fontSize={isMobile ? "2.5rem" : "4rem"}>
+      <SerifHeading level="h1" fontSize={isMobile ? "2.25rem" : "4rem"}>
         Only CTA on the page
       </SerifHeading>
       <Sheet
