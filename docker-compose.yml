@@ -1,0 +1,27 @@
+services:
+  frontend:
+    container_name: frontend
+    restart: unless-stopped
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: "http://localhost/api"
+
+  backend:
+    container_name: backend
+    restart: unless-stopped
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+      args:
+        PORT: 3000
+
+  proxy:
+    image: nginx
+    container_name: nginx
+    restart: unless-stopped
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80

@@ -115,7 +115,7 @@ const ContactUs = () => {
     ) {
       setIsLoading(true);
       try {
-        const response = await axios.post("http://localhost:3000/", {
+        const response = await axios.post(import.meta.env.VITE_API_URL, {
           name: nameRef.current.value,
           email: emailRef.current.value,
           messageRef: messageRef.current.value,
