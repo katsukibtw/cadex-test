@@ -1,6 +1,5 @@
 import { styled } from "@mui/joy";
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 
 import { SerifHeading } from "@/shared/StyledComponents";
 
@@ -16,21 +15,13 @@ const PageContainer = styled("div")(() => ({
 
 const Response = () => {
   const { state } = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (
-      state === null ||
-      state.redirected === false ||
-      state.redirected === undefined
-    )
-      navigate("/contact-us");
-  }, [state, navigate]);
 
   return (
     <PageContainer>
       <SerifHeading level="h1" fontSize={"4rem"}>
-        Message generated on the server
+        {state !== null
+          ? state.message
+          : "Произошла ошибка. Сообщение не найдено"}
       </SerifHeading>
     </PageContainer>
   );

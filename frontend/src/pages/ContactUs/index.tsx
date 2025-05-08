@@ -124,7 +124,7 @@ const ContactUs = () => {
         setIsLoading(false);
         navigate(`/contact-us/response`, {
           state: {
-            redirected: true,
+            message: response.data.message,
           },
         });
       } catch (e) {
